@@ -1,0 +1,667 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="su">
+  <meta name="keywords" content="“数据结构,c,c++,java,pyhton,js,源码,随记,c++23/26新特性,机器学习,图形学”">
+  
+    <meta name="description" content="Java与c++不同之处 1.break带标签语法，即使用break和continue语句实现c++中goto的功能，跳出多重嵌套 123456789101112131415161718192021222324252627282930313233public class GotoDemo &amp;#123;    public static void main(String[] args) &amp;#123;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java from c++">
+<meta property="og:url" content="http://example.com/2023/07/03/javafromc++/index.html">
+<meta property="og:site_name" content="Feogets个人blog">
+<meta property="og:description" content="Java与c++不同之处 1.break带标签语法，即使用break和continue语句实现c++中goto的功能，跳出多重嵌套 123456789101112131415161718192021222324252627282930313233public class GotoDemo &amp;#123;    public static void main(String[] args) &amp;#123;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-07-03T15:17:15.000Z">
+<meta property="article:modified_time" content="2023-11-03T15:49:44.252Z">
+<meta property="article:author" content="su">
+<meta property="article:tag" content="“数据结构,c,c++,java,pyhton,js,源码,随记,c++23&#x2F;26新特性,机器学习,图形学”">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>java from c++ - Feogets个人blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Feogets</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/first.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="java from c++"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-07-03 23:17" pubdate>
+          2023年7月3日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          49 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">java from c++</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="Java与c-不同之处"><a href="#Java与c-不同之处" class="headerlink" title="Java与c++不同之处"></a>Java与c++不同之处</h2><hr>
+<p>1.break带标签语法，即使用break和continue语句实现c++中goto的功能，跳出多重嵌套</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">GotoDemo</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        label: <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">8</span>; j++) &#123;<br>                System.out.println(j);<br>                <span class="hljs-keyword">if</span> (j % <span class="hljs-number">2</span> != <span class="hljs-number">0</span>) &#123;<br>                    <span class="hljs-keyword">break</span> label;<br>                &#125;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br><br>```   <br><br><br><span class="hljs-number">2.</span>java中非布尔变量不能隐式转换为布尔变量<br>```java<br>    <span class="hljs-type">int</span> a=<span class="hljs-number">10</span>;<br>    <span class="hljs-type">boolean</span> isd=<span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span>(a)&#123;&#125;       <span class="hljs-comment">//这是不允许的</span><br>    <span class="hljs-keyword">if</span>(isd)&#123;&#125;     <span class="hljs-comment">//正确的</span><br>```   <br><span class="hljs-number">3.</span>new的数组与c++有较大不同<br>```java<br><span class="hljs-comment">//java</span><br>    <span class="hljs-type">int</span>[] arr=<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">5</span>];<br>    <span class="hljs-comment">//c++ int* arr=new int[5]; []等同于*</span><br>    System.out.println(Arrays.toString(arr));<br>    <span class="hljs-comment">//结果[0, 0, 0, 0, 0]，即new出的数组已经进行了值初始化</span><br>    <span class="hljs-comment">//另外我们调用了Array.toString()方法</span><br>    System.out.println(arr.length);<br>    <span class="hljs-comment">//结果：5，可想而知我们new出来的其实不是一个c++中的数组</span><br></code></pre></td></tr></table></figure>
+<p>java中的数组是一种数组类，里面封装了数组长度length,与<code>Arrays</code>是不同的。另外，java中数组类的对象可以由另一中方式定义</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">int</span>[] arr=&#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>&#125;;<br><span class="hljs-type">int</span>[] brr=arr;<br><span class="hljs-comment">//brr和arr是指向同一个数组对象的指针</span><br>brr[<span class="hljs-number">0</span>]=<span class="hljs-number">10</span>;<br>System.out.println(arr[<span class="hljs-number">0</span>]);<br><span class="hljs-comment">//10</span><br><span class="hljs-type">int</span>[][] crr=<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">10</span>][<span class="hljs-number">5</span>];<br>crr[<span class="hljs-number">1</span>][<span class="hljs-number">2</span>]=<span class="hljs-number">1</span>;<br>System.out.print(crr[<span class="hljs-number">1</span>][<span class="hljs-number">2</span>]);<span class="hljs-comment">//print不同于在不加/n</span><br><span class="hljs-comment">//1，二维数组的创建</span><br></code></pre></td></tr></table></figure>
+<p>4.<code>switch-case</code>扩展：字符串可以作为<code>switch-case</code>的判断量，要在java1.7以上才能用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java">String s1=<span class="hljs-string">&quot;01234苏&quot;</span>;<br><span class="hljs-keyword">switch</span>(s1)<br>&#123;<br>    <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;012&quot;</span>:<span class="hljs-keyword">break</span>;<br>    <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;01234苏&quot;</span>:<br>        System.out.println(<span class="hljs-string">&quot;s1只是管理者&quot;</span>);<br>        <span class="hljs-keyword">break</span>;<br>&#125;<br><span class="hljs-comment">//s1只是管理者,相当于一个指针指向String类对象</span><br></code></pre></td></tr></table></figure>
+<p>5.java中的包裹类——对象包装器，java中的每种内置类型都有对应的包裹类，<code>int</code>-<code>Integer</code>,<code>double</code>-<code>Double</code>,<code>Short</code>-<code>short</code>,Long-long…内置类型不能使用于容器(如HashMap…),需要用对应包裹类作为容器所接收的类型</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java">     HashSet&lt;<span class="hljs-type">int</span>&gt; hs=<span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;<span class="hljs-type">int</span>&gt;();        <span class="hljs-comment">//x</span><br>     HashSet&lt;integer&gt; he=<span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;integer&gt;();<span class="hljs-comment">//√</span><br>     <span class="hljs-comment">//用包裹类不会影响使用</span><br>```  <br><br><span class="hljs-number">6.</span>java对强制类型转换的处理<br>```java<br>     <span class="hljs-comment">//有这样两个类</span><br>     <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Employee</span>&#123;...&#125;<br>     <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Manager</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Employee</span>&#123;...&#125;<br>     Employee em=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Manager</span>();<br>     Employee ma=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Employee</span>();<br>     Manager er=(Manager)em;<span class="hljs-comment">//合理，编译器知道em的实际对象</span><br>     er=(Manager)ma;        <span class="hljs-comment">//抛出ClassCastException异常</span><br></code></pre></td></tr></table></figure>
+<p>实际工作中有可能会有强制类型转换的需要，但是有什么办法判断这个类型转换是否成功呢，我们知道在c++中可以通过返回的指针是否为NULL判断</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//c++</span><br>er=<span class="hljs-keyword">dynamic_cast</span>&lt;Manager&gt;ma;   <br><span class="hljs-keyword">if</span>(er!=<span class="hljs-literal">NULL</span>)&#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;类型转换成功\n&quot;</span>);<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>在java中有<code>instanceof</code>判断，<code>em</code>能够转换成<code>Manager</code>就返回<code>true</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span>(em <span class="hljs-keyword">instanceof</span> Manager)&#123;<br>   er=(Manager)em;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>7.default关键字<br>8.static-静态代码块与匿名代码块<br>java中static除了用于与c++中相同的静态变量和静态方法之外，还有静态代码块这一用处，在匿名代码块前加上关键字static即可成为匿名代码块，在类加载时会调用静态代码块，因此只会调用一次，而匿名代码块则在每次new一个对象时都会调用一次。另外，接口是不能有静态语句块的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">anomymity</span> &#123;<br>	&#123;<br>		System.out.println(<span class="hljs-string">&quot;anomymity code&quot;</span>);<br>	&#125;<br>	<span class="hljs-keyword">static</span> <span class="hljs-type">int</span> value=<span class="hljs-number">19</span>;<br>	<span class="hljs-keyword">static</span> &#123;<br>		System.out.println(<span class="hljs-string">&quot;static codes&quot;</span>+<span class="hljs-string">&quot;static int &quot;</span>+value);<br>	&#125;<br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>		<span class="hljs-comment">// TODO Auto-generated method stub</span><br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">anomymity</span>();<br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">anomymity</span>();<br>	&#125;<br>   <span class="hljs-comment">//运行结果</span><br>   <span class="hljs-comment">//static codesstatic int 19</span><br>   <span class="hljs-comment">//anomymity code</span><br>   <span class="hljs-comment">//anomymity code</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>另外从上面示例代码中，Static code block能够调用static variable，因此static variable在static code block之前就定义了，但是就只是这样就简单判断了吗？不，我们要看一下java的字节码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs java">   <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">anomymity</span> &#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">value</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;<br><br>    &#123;<br>        System.out.println(<span class="hljs-string">&quot;anomymity code&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] var0)</span> &#123;<br>       <br>    &#125;<br>     <span class="hljs-keyword">static</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;static codes&quot;</span>);<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">//静态部分的字节码</span><br><span class="hljs-keyword">static</span> &#123;&#125;;<br>    Code:<br>       <span class="hljs-number">0</span>: bipush        <span class="hljs-number">10</span>                  <span class="hljs-comment">//将(int)10入栈</span><br>       <span class="hljs-number">2</span>: putstatic     #<span class="hljs-number">5</span>                  <span class="hljs-comment">//出栈给静态变量value赋值10</span><br>       <span class="hljs-number">5</span>: getstatic     #<span class="hljs-number">2</span>                  <span class="hljs-comment">//取静态对象System.out</span><br>       <span class="hljs-number">8</span>: ldc           #<span class="hljs-number">6</span>                  <span class="hljs-comment">//将static code字符串常量入栈</span><br>      <span class="hljs-number">10</span>: invokevirtual #<span class="hljs-number">4</span>                  <span class="hljs-comment">//调用out的静态函数println()输出static code</span><br>      <span class="hljs-number">13</span>: <span class="hljs-keyword">return</span><br>```      <br>有趣的是没有`<span class="hljs-keyword">static</span>&#123;&#125;`静态代码块时的字节码<br>```java<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">anomymity</span> &#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">value</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;<br><br>    &#123;<br>        System.out.println(<span class="hljs-string">&quot;anomymity code&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] var0)</span> &#123;<br>    &#125;<br>&#125;<br><span class="hljs-comment">//静态部分</span><br><span class="hljs-keyword">static</span> &#123;&#125;;<br>    Code:<br>       <span class="hljs-number">0</span>: bipush        <span class="hljs-number">10</span><br>       <span class="hljs-number">2</span>: putstatic     #<span class="hljs-number">5</span>                  <span class="hljs-comment">// Field value:I</span><br>       <span class="hljs-number">5</span>: <span class="hljs-keyword">return</span><br></code></pre></td></tr></table></figure>
+<p>可以看到，<code>static&#123;&#125;</code>静态部分仍旧存在，并且静态变量<code>value</code>在其中赋值,了解后知道非常量的静态变量value是先准备阶段分配空间并初始化为0，然后在类加载的初始化阶段，类构造器&lt;clinit&gt;(也就是字节码中的<code>static&#123;&#125;</code>部分)会按语句在源文件中的顺序自动收集所以静态变量的赋值语句和静态语句块组合起来依次执行。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">anomymity</span> &#123;<br>     <span class="hljs-keyword">static</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;static codes&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] var0)</span> &#123;<br>       System.out.println(anomymity.value);<br>    &#125;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> value=<span class="hljs-number">10</span>；<br>&#125;<br><span class="hljs-comment">//字节码静态部分</span><br><span class="hljs-keyword">static</span> &#123;&#125;;<br>    Code:<br>       <span class="hljs-number">0</span>: getstatic     #<span class="hljs-number">2</span>                  <span class="hljs-comment">// Field java/lang/System.out:Ljava/io/PrintStream;</span><br>       <span class="hljs-number">3</span>: ldc           #<span class="hljs-number">5</span>                  <span class="hljs-comment">// String static codes</span><br>       <span class="hljs-number">5</span>: invokevirtual #<span class="hljs-number">4</span>                  <span class="hljs-comment">// Method java/io/PrintStream.println:(Ljava/lang/String;)V</span><br>       <span class="hljs-number">8</span>: bipush        <span class="hljs-number">10</span><br>      <span class="hljs-number">10</span>: putstatic     #<span class="hljs-number">6</span>                  <span class="hljs-comment">// Field value:I</span><br>      <span class="hljs-number">13</span>: <span class="hljs-keyword">return</span><br></code></pre></td></tr></table></figure>
+<p>可以看到，<code>value</code>的赋值(<code>putstatic</code>)在静态语句块的执行之后了<br>并且此时静态语句块是不能引用value的，但是却能赋值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">anomymity</span> &#123;<br>     <span class="hljs-keyword">static</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;static codes&quot;</span>+value);<span class="hljs-comment">//error：不能引用未定义的变量</span><br>        value=<span class="hljs-number">100</span>;                               <span class="hljs-comment">//right：可以赋值</span><br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] var0)</span> &#123;<br>       System.out.println(anomymity.value);<br>    &#125;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> value=<span class="hljs-number">10</span>；<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>那么我相信你已经懂了吧，那么来想一下，上面的代码如何没有error的那句，会输出什么呢？<br>9.java中无法判断输入数量的情况<br>首先先看一下c++是怎么处理了</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> a;<br><span class="hljs-keyword">while</span>(<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;a)!=<span class="hljs-number">1</span>)&#123;&#125;<br><span class="hljs-keyword">while</span>(cin&gt;&gt;a)&#123;&#125;<br></code></pre></td></tr></table></figure>
+<p>只要看看函数返回值就行了</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">scanf</span><span class="hljs-params">( <span class="hljs-type">const</span> <span class="hljs-type">char</span>          *format, ... )</span></span>; <br></code></pre></td></tr></table></figure>
+<p>scanf函数返回的int值是接收到的类型匹配的输入个数，示例中只接收一个int类型的a，所以判断返回值是否&#x3D;&#x3D;1即可    </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">extern</span> std::istream cin;<br>basic_istream&amp; <span class="hljs-keyword">operator</span>&gt;&gt;( T&amp; value );<br></code></pre></td></tr></table></figure>
+<p>cin是一个istream对象，而&gt;&gt;是cin的一个重载的操作符，它返回一个basic_istream的引用,是istream的父类，相当又一个cin</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++">cin&gt;&gt;a&gt;&gt;str&gt;&gt;b;    <span class="hljs-comment">//所以可以这样</span><br>((cin&gt;&gt;a)&gt;&gt;str)&gt;&gt;b;<span class="hljs-comment">//相当于这样</span><br><span class="hljs-comment">//但是问题来了</span><br><span class="hljs-keyword">while</span>(cin&gt;&gt;a)&#123;&#125;    <span class="hljs-comment">//cin会返回一个istream&amp; a_istream</span><br><span class="hljs-keyword">while</span>(a_istream)&#123;&#125;  <span class="hljs-comment">//我这么大一个istream怎么变成bool值的呢</span><br><br></code></pre></td></tr></table></figure>
+<p>答案是重载强制类型转换操作符，当我们要将istream强制类型转换成bool的操作是<code>(bool)another</code>,那么我们只要看一下c++的源码就行了</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//重载(bool)a_istream</span><br><span class="hljs-function"><span class="hljs-keyword">explicit</span> _CLR_OR_THIS_CALL <span class="hljs-keyword">operator</span> <span class="hljs-title">bool</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> !<span class="hljs-built_in">fail</span>();<br>&#125;<br><span class="hljs-comment">//重载!a_istream,防止while(!cin&gt;&gt;a)&#123;&#125;</span><br>_NODISCARD <span class="hljs-type">bool</span> __CLR_OR_THIS_CALL <span class="hljs-keyword">operator</span>!() <span class="hljs-type">const</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">fail</span>();<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>那么还有stream流是什么呢，好了好了，打住，我们先回到正题，那么在java中无法得知输入的整数个数怎么办,以下仅限于<code>Scanner</code>用法</p>
+<pre><code class="java">    //有几种解决方案，我们来看一下
+    //第一种，最简单的，输入一个标志着结束的数字如0
+    Scanner in = new Scanner(System.in);
+    int sc;
+    do &#123;
+        sc=in.nextInt();
+    &#125;while(sc!=0);
+   
+   //第二种，用hasNextInt()方法，但是在console中要输入ctrl+z或者任意字符标志结束，如果输入ctrl+z，那么接下来的不能再进行输入
+    while(in.hasNextInt())
+    &#123;
+        sc=in.nextInt();
+    &#125;
+   
+   //第三种，利用String，再转换成整数
+    String s=&quot;&quot;;
+    while(!(s=in.nextLine()).equals(&quot;&quot;))
+    &#123;
+        sc=Integer.parseInt(s);
+        System.out.println(sc);
+    &#125;
+    
+</code></pre>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>java from c++</div>
+      <div>http://example.com/2023/07/03/javafromc++/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>su</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年7月3日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/06/26/initializer_list/" title="列表初始化的内部机制">
+                        <span class="hidden-mobile">列表初始化的内部机制</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
